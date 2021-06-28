@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <LinearLayout
+        android:layout_width="288dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <EditText
+            android:id="@+id/txtJanuary"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="January"
+            android:inputType="numberDecimal"
+            android:text="50" />
+
+        <EditText
+            android:id="@+id/txtFebruary"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="February"
+            android:inputType="numberDecimal"
+            android:text="100"/>
+
+        <EditText
+            android:id="@+id/txtMarch"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="March"
+            android:inputType="numberDecimal"
+            android:text="150"/>
+
+        <EditText
+            android:id="@+id/txtApril"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="April"
+            android:inputType="numberDecimal"
+            android:text="200"/>
+
+        <EditText
+            android:id="@+id/txtMay"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="May"
+            android:inputType="numberDecimal"
+            android:text="250"/>
+
+        <EditText
+            android:id="@+id/txtJune"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="June"
+            android:inputType="numberDecimal"
+            android:text="300"/>
+
+        <EditText
+            android:id="@+id/txtJuly"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="July"
+            android:inputType="numberDecimal"
+            android:text="350"/>
+
+        <EditText
+            android:id="@+id/txtAugust"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="August"
+            android:inputType="numberDecimal"
+            android:text="400"/>
+
+        <EditText
+            android:id="@+id/txtSeptember"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="September"
+            android:inputType="numberDecimal"
+            android:text="450"/>
+
+        <EditText
+            android:id="@+id/txtOctober"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="October"
+            android:inputType="numberDecimal"
+            android:text="500"/>
+
+        <EditText
+            android:id="@+id/txtNovember"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="November"
+            android:inputType="numberDecimal"
+            android:text="550"/>
+
+        <EditText
+            android:id="@+id/txtDecember"
+            android:layout_width="match_parent"
+            android:layout_height="66dp"
+            android:ems="10"
+            android:hint="December"
+            android:inputType="numberDecimal"
+            android:text="600"/>
+
+        <Button
+            android:id="@+id/btnGenerateChart"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Create chart" />
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

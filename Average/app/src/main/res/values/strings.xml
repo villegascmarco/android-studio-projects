@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">VCIMP Desviación Estándar</string>
+    <string name="n_meros">Números</string>
+    <string name="inserte_n_meros_separados_por_comas">Inserte números separados por comas</string>
+</resources>

@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">VCIMP_Send_Email</string>
+    <string name="asunto">Asunto</string>
+    <string name="destinatario">Destinatario</string>
+    <string name="enviar">Enviar</string>
+    <string name="enviar_icono_adjunto">Enviar icono adjunto</string>
+    <string name="mensaje">Mensaje</string>
+</resources>
