@@ -32,6 +32,7 @@ import com.model.vcimpquote.Quote;
 import com.model.vcimpquote.Vendor;
 
 import java.text.DateFormat;
+import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -61,11 +62,21 @@ public class QuoteDetailActivity extends AppCompatActivity {
     private Button btnSave;
     private Button btnDelete;
 
+    private TextView txtToCapital;
+    private TextView txtToInterest;
+    private TextView txtPayToBank;
+
     private int IntVendor;
     private int IntCustomer;
     private int IntCar;
 
     private String paymentTerms;
+
+    private double malaPractica;
+    private boolean malaPractica2 = false;
+    private double totalCapital;
+    private double totalInterest;
+    private double totalBank;
 
     private List<TextView> textViews = new ArrayList<>();
     private SQLiteDatabase db;
@@ -107,6 +118,10 @@ public class QuoteDetailActivity extends AppCompatActivity {
 
         btnSave = findViewById(R.id.btnSave);
         btnDelete = findViewById(R.id.btnDelete);
+
+        txtToCapital = findViewById(R.id.txtToCapital);
+        txtToInterest = findViewById(R.id.txtToInterest);
+        txtPayToBank = findViewById(R.id.txtPayToBank);
 
         vendorSpin = new VendorSpin(this, android.R.layout.simple_spinner_item,
                 getAllVendors());
@@ -169,6 +184,10 @@ public class QuoteDetailActivity extends AppCompatActivity {
                 IntCar = car.getId();
                 // Here you can do the action you want to...
                 txtAmount.setText("" + car.getPrice());
+                if (!malaPractica2) {
+                    malaPractica2 = true;
+                    txtDownpaymentPer.setText("" + (100 - malaPractica * 100 / Double.parseDouble(txtAmount.getText().toString())));
+                }
             }
 
             @Override
@@ -251,12 +270,17 @@ public class QuoteDetailActivity extends AppCompatActivity {
     }
 
     private void loadData(int selectedID) {
+        DecimalFormat df = new DecimalFormat("#.00");
         Date date;
         double interest;
         double accInterest;
         double acc;
         double acc2;
         double capital;
+
+        double toCapital = 0;
+        double toInterest = 0;
+        double payToBank = 0;
 
         Cursor cursor = db.rawQuery("SELECT * FROM quote where id = " + selectedID, null);
         if (cursor.getCount() == 0) {
@@ -270,14 +294,16 @@ public class QuoteDetailActivity extends AppCompatActivity {
         quote.setDate(cursor.getString(1));
         txtDate.setText(quote.getDate());
         quote.setVendor(cursor.getInt(2));
-        spnVendor.setSelection(quote.getVendor());
+        spnVendor.setSelection(quote.getVendor() - 1);
         quote.setCustomer(cursor.getInt(3));
-        spnCustomer.setSelection(quote.getCustomer());
+        spnCustomer.setSelection(quote.getCustomer() - 1);
         quote.setCar(cursor.getInt(4));
-        spnCar.setSelection(quote.getCar());
+        spnCar.setSelection(quote.getCar() - 1);
         quote.setRemainingAmount(cursor.getDouble(5));
         quote.setPaymentTerms(cursor.getInt(6));
         quote.setInterestRate(cursor.getDouble(7));
+
+        malaPractica = quote.getRemainingAmount();
 
         try {
             date = new SimpleDateFormat("dd/mm/yy").parse(quote.getDate());
@@ -315,16 +341,19 @@ public class QuoteDetailActivity extends AppCompatActivity {
                         textView.setText("    Pago    ");
                         break;
                     case 4:
-                        textView.setText("" + capital);
+                        textView.setText(df.format(capital));
+                        toCapital += capital;
                         break;
                     case 5:
-                        textView.setText(getText("" + acc));
+                        textView.setText(df.format(acc));
+                        toInterest += acc;
                         break;
                     case 6:
-                        textView.setText(getText("" + (capital + acc)));
+                        textView.setText(df.format(capital + acc));
+                        payToBank += (capital + acc);
                         break;
                     case 7:
-                        textView.setText("" + acc2);
+                        textView.setText(df.format(acc2));
                         break;
                 }
                 tableRow.addView(textView);
@@ -332,14 +361,16 @@ public class QuoteDetailActivity extends AppCompatActivity {
             acc2 -= capital;
             interest -= accInterest;
             tableItem.addView(tableRow);
+
+            txtToCapital.setText("" +toCapital);
+            txtToInterest.setText("" +toInterest);
+            txtPayToBank.setText("" +payToBank);
         }
     }
 
-    private String getText(String value) {
-        if (value.length() > 6) {
-            return value.substring(0, 6);
-        }
-        return value;
+    private String getText(double value) {
+
+        return "";
     }
 
     private String addMonth(Date date, int i) {
